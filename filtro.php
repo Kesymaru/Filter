@@ -26,50 +26,35 @@ class Filtro {
 	*/
 	public function Filtrar($campo, $valor){
 		
+		$resultados = array();
 		$datos = json_decode( $this->test, true );
 		
-		var_dump($datos);
+		//var_dump($datos);
 		
-		foreach( $datos->stdClass as $value ){
-			/*if( is_array($value)){
-				foreach ($value as $key => $valor) {
-					print_r($valor);
-				}
-			}*/
-			echo $value;
-		}
-	}
-
-	/**
-	* FILTRA UN ARRAY Y DEVUELVE EL RESULTADO
-	* @param <array> $datos 
-	* @return <array> $resultados
-	* @return <boolean> false si falla
-	*/
-	private function FiltrarArray($campo){
-		foreach ($variable as $key => $value) {
-			if( is_array($value) ){
-				foreach ($value as $key2 => $value2) {
-					if( is_array($value2)){
-
-					}else{
-						if( $key2 != $campo ){
-							unset($datos[$key]);
-						}
+		foreach( $datos['INFOUNIDAD'] as $fila => $value ){
+			
+			if( is_array($value)){
+				foreach ($value as $f => $c) {
+					echo $fila.' | '.$f.'=>'. $c. '<br/>';
+					
+					if( $campo == $f && $valor == $c){
+						$resultados[] = $value;
 					}
-				}
-			}else{
-				if( $key != $campo ){
-					unset($datos[$key]);
 				}
 			}
 		}
+
+		echo '<hr><pre>';
+
+		print_r($resultados);
+
+		echo '</pre>';
 	}
 
 }
 
 $filtrar = new Filtro();
 
-$filtrar->Filtrar('SUCURSAL', 'PTRABAJO');
+$filtrar->Filtrar('TIPO_VEHICULO', 'YA20');
 
 ?>
